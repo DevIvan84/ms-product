@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: ${PORT:0}
 
 spring:
   
@@ -33,9 +33,9 @@ springdoc:
   title: "Product Api"
   description: "Api for product"
   version: "v1.0.0"
-  contact-name: "Jean Ramal"
-  contact-email: "jean.ramal@codearti.com"
-  contact-url: "https://www.codearti.com"
+  contact-name: "Ivan Flores"
+  contact-email: "ivan.flores@gmail.com"
+  contact-url: "https://www.home.com"
   
   api-docs:
     path: /api-docs
@@ -46,3 +46,26 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
 #    operations-sorter: alpha
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+
+eureka:
+  client:
+    enabled: true
+    service-url:
+      defaultZone: http://admin:admin@ms-discovery-server:8761/eureka
+    initial-instance-info-replication-interval-seconds: 5
+    registry-fetch-interval-seconds: 5
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 5
